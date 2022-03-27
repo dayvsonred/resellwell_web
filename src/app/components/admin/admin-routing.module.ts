@@ -4,14 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from '../../containers';
 
-const routes: Routes = [
+const routes: Routes = [ 
   {
     path: '',
     component: DefaultLayoutComponent,
-    data: {
+    /*data: {
       title: 'Home'
-    },
+    },*/
     children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
       {
         path: 'base',
         loadChildren: () => import('../.././views/base/base.module').then(m => m.BaseModule)
@@ -25,7 +30,7 @@ const routes: Routes = [
         loadChildren: () => import('../.././views/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
       {
-        path: '',
+        path: 'dashboard',
         loadChildren: () => import('../.././views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {

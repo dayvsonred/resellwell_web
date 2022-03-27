@@ -11,16 +11,19 @@ import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     loadChildren: () => import('./core/components/auth/auth.module').then((m) => m.AuthModule),
     data: {
       title: 'Login Page'
     }
   },
   {
-    path: 'dashboard',
+    path: 'home',
     //canActivateChild: [AuthGuard],
     loadChildren: () => import('./components/admin/admin.module').then((m) => m.AdminModule),
+    data: {
+      title: 'Home'
+    },
   },
 
 
