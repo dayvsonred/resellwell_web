@@ -11,6 +11,24 @@ import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
   {
+    path: '',
+    loadChildren: () => import('./core/components/auth/auth.module').then((m) => m.AuthModule),
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
+    path: 'dashboard',
+    //canActivateChild: [AuthGuard],
+    loadChildren: () => import('./components/admin/admin.module').then((m) => m.AdminModule),
+      data: {
+        title: 'Login Page'
+      }
+  },
+
+
+/*
+  {
     path: 'dashboard',
     redirectTo: 'dashboard',
     pathMatch: 'full',
@@ -96,6 +114,7 @@ export const routes: Routes = [
     ]
   },
   { path: '**', component: P404Component },
+  */
 ];
 
 @NgModule({
