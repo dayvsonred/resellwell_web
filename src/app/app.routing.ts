@@ -11,7 +11,7 @@ import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     redirectTo: 'dashboard',
     pathMatch: 'full',
   },
@@ -31,6 +31,13 @@ export const routes: Routes = [
   },
   {
     path: 'login',
+    component: LoginComponent,
+    data: {
+      title: 'Login Page'
+    }
+  },
+  {
+    path: '',
     component: LoginComponent,
     data: {
       title: 'Login Page'
@@ -81,10 +88,14 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
+      },
+      {
+        path: 'clientes',
+        loadChildren: () => import('./views/customer/customer.module').then(m => m.CustomerModule)
       }
     ]
   },
-  { path: '**', component: P404Component }
+  { path: '**', component: P404Component },
 ];
 
 @NgModule({

@@ -45,14 +45,14 @@ import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
+    AppAsideModule,
+    AppBreadcrumbModule.forRoot(),
+    AppHeaderModule,
+    AppFooterModule,
+    AppSidebarModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AppAsideModule,
-    AppBreadcrumbModule.forRoot(),
-    AppFooterModule,
-    AppHeaderModule,
-    AppSidebarModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
