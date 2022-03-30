@@ -4,5 +4,10 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrlPort : "http://localhost:8765",
+  baseUrlBFF : "/api/resell-bff",
+  baseUrlOauth : "/resell-oauth",
+  oauth_token : "/oauth/token"
+
 };
