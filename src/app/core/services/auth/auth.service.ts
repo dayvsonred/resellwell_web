@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable, map, throwError, catchError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
@@ -59,10 +60,14 @@ export class AuthService {
     Params.set('username', 'nina@gmail.com');
     Params.set('password', '123456');
 
-    return this.http.post<{ token: string }>(`${this.urlBase}${this.authorization}`, Params.toString(), { headers } ).pipe(
+    return this.http.post<{ access_token: string, expires_in: string, jti: string, token_type: string }>(`${this.urlBase}${this.authorization}`, Params.toString(), { headers } ).pipe(
       map((res) => {
+        console.log("no post lohging pegar token");
+        console.log("__________________________");console.log("__________________________");console.log("__________________________");
+        console.log(res)
+
         localStorage.removeItem('access_token');
-        localStorage.setItem('access_token', res.token);
+        localStorage.setItem('access_token', res.access_token);
         return this.router.navigate(['home']);
       }),
       catchError((e) => {
@@ -74,6 +79,20 @@ export class AuthService {
         );
       })
     );
+  }
+
+  public logout() {
+    localStorage.removeItem('access_token');
+    return this.router.navigate(['']);
+  }
+
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('access_token');
+
+    if (!token) return false;
+
+    const jwtHelper = new JwtHelperService();
+    return !jwtHelper.isTokenExpired(token);
   }
 
 }

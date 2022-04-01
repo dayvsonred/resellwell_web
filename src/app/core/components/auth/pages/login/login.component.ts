@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   toLogin() : void {
 
-    console.log("to ok aqqqqqqqqqqqqqq")
+    console.log("to ok aqqq oiWERas¨%&888")
 
     this.authService.sign({
       email : 'my@getMaxListeners.com',
