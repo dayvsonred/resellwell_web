@@ -5,9 +5,10 @@
 
 export const environment = {
   production: false,
-  baseUrlPort : "http://localhost:8765",
+  baseUrlGateWay : "http://localhost:8765",
   baseUrlBFF : "/api/resell-bff",
   baseUrlOauth : "/resell-oauth",
-  oauth_token : "/oauth/token"
+  oauth_token : "/oauth/token",
+  PERSON_customer_list : "/customer/list"
 
 };

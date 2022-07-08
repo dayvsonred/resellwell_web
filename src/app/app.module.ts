@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy, CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -21,8 +21,9 @@ import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
-import { LoginComponent } from './views/login/login.component';
+import { LoginComponent } from './core/components/auth/pages/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -62,6 +63,10 @@ import { PrincipalComponent } from './components/admin/pages/principal/principal
     IconModule,
     IconSetModule.forRoot(),
     HttpClientModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    
   ],
   declarations: [
     AppComponent,

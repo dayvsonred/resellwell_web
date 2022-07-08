@@ -12,7 +12,7 @@ import { environment } from '../../../../environments/environment';
 export class AuthService {
 
   private authorization: String = `${environment.oauth_token}`;
-  private urlBase: String = `${environment.baseUrlPort}${environment.baseUrlOauth}`;
+  private urlBase: String = `${environment.baseUrlGateWay}${environment.baseUrlOauth}`;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -54,11 +54,16 @@ export class AuthService {
 
   public sign(payload: { email: string; password: string }): Observable<any> {
 
+    console.log(payload.email)
+    console.log(payload.password)
+
     const headers = { 'Authorization': "Basic QVBJX05BTUVfQUNDRVNTOkFQSV9TRUNSRVRfQUNDRVNT", "Content-Type": "application/x-www-form-urlencoded" };
     const Params = new URLSearchParams();
     Params.set('grant_type', 'password');
-    Params.set('username', 'nina@gmail.com');
-    Params.set('password', '123456');
+    //Params.set('username', 'nina@gmail.com');
+    //Params.set('password', '123456');
+    Params.set('username', payload.email);
+    Params.set('password', payload.password);
 
     return this.http.post<{ access_token: string, expires_in: string, jti: string, token_type: string }>(`${this.urlBase}${this.authorization}`, Params.toString(), { headers } ).pipe(
       map((res) => {

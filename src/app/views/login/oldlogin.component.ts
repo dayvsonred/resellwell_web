@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  templateUrl: 'oldlogin.component.html'
 })
-export class LoginComponent implements OnInit {
+export class OldLoginComponent implements OnInit {
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
   }
