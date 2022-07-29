@@ -60,7 +60,6 @@ export class AuthService {
     const headers = { 
       'Authorization': "Basic QVBJX05BTUVfQUNDRVNTOkFQSV9TRUNSRVRfQUNDRVNT", 
       "Content-Type": "application/x-www-form-urlencoded",
-      'Access-Control-Allow-Origin': '*'
     };
     const Params = new URLSearchParams();
     Params.set('grant_type', 'password');
