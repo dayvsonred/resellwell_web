@@ -9,6 +9,14 @@ export const environment = {
   baseUrlBFF : "/api/resell-bff",
   baseUrlOauth : "/resell-oauth",
   oauth_token : "/oauth/token",
-  PERSON_customer_list : "/customer/list"
+  PERSON_customer_list : "/customer/list",
+  person : {
+    path: "/resell-person",
+    customer:
+    { 
+     list : "/customer/list",
+    }
+  }
+
 
 };
