@@ -29,12 +29,12 @@ export class CustomerService {
     return "this.customer service ok";
   }
 
-  public getCustomer(): Observable<HttpResponse<CustomerList>> {
+  public getCustomer(): Observable<HttpResponse<CustomerList[]>> {
      let body = new CustomerGet("1");
      console.log("go");
      const headers = { 'Authorization': this.getToken() }; 
      console.log(`${this.urlBase}${this.urlCustomerList}`);
-    return this.http.post<HttpResponse<CustomerList>>(`${this.urlBase}${this.urlCustomerList}`, body, { headers })
+    return this.http.post<HttpResponse<CustomerList[]>>(`${this.urlBase}${this.urlCustomerList}`, body, { headers })
     // .pipe(
     //   map((res:any) => { 
     //     console.log("res ************")

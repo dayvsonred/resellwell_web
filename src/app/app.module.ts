@@ -75,7 +75,7 @@ import { PrincipalComponent } from './components/admin/pages/principal/principal
     P500Component,
     LoginComponent,
     RegisterComponent,
-    PrincipalComponent
+    PrincipalComponent,
   ],
   providers: [
     {
