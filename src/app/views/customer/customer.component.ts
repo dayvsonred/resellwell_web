@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
 import { CustomerList } from '../../models/customerList.model';
 import { CustomerService } from './customer.service'; 
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   templateUrl: 'customer.component.html',
@@ -10,12 +11,13 @@ export class CustomerComponent implements OnInit {
 
   public customers: any;
   private element: any;
+  modalRef?: BsModalRef;
 
   title = 'appBootstrap';
   
   closeResult: string;
 
-  constructor( private customerService: CustomerService,   ) { 
+  constructor( private customerService: CustomerService, private modalService: BsModalService  ) { 
  
 
   }
@@ -74,6 +76,11 @@ export class CustomerComponent implements OnInit {
     elemento.classList.add("jw-modal-open");
     //elemento.classList.add("modalOpenDiv");
 
+  }
+
+
+  openModal(template: any) {
+    this.modalRef = this.modalService.show(template);
   }
  
 

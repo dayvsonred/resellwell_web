@@ -45,6 +45,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { PrincipalComponent } from './components/admin/pages/principal/principal.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -66,6 +68,8 @@ import { PrincipalComponent } from './components/admin/pages/principal/principal
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
     
   ],
   declarations: [
