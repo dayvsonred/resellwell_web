@@ -13,8 +13,8 @@ export class CustomerComponent implements OnInit {
   public customers: any; 
   modalRef?: BsModalRef;
   public personNew: PersonNew;
-  public selectRow?: string[] ;
-  myClassBinding: string;
+  public selectRow?: string[];
+  public customerSelect: any; 
 
   title = 'appBootstrap';
   
@@ -29,11 +29,9 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     console.log("iniciando ok ");
     this.startInitStage(); 
-    
     this.iniPerson();
     this.actionSelectRow(null);
-    console.log(this.customerService.getTesteService());
-    this.myClassBinding = "trSelectBackColor";
+    //console.log(this.customerService.getTesteService());
      
   }
 
@@ -56,10 +54,9 @@ export class CustomerComponent implements OnInit {
     console.log("clickRow");
     console.log(customer);
     console.log(lineClick);
+    this.customerSelect = customer;
     this.actionSelectRow(lineClick);
-  
   }
-
 
   clickCreat(template){
     console.log("clickCreat");
@@ -68,25 +65,15 @@ export class CustomerComponent implements OnInit {
   }
 
   clickEdit(){
-    console.log("clickEdit");
+    console.log("clickEdit"); 
   }
 
   clickDell(){
     console.log("clickDell");
-  }
+    console.log(this.customerSelect);
 
-  modalopen(){
-    // var body = document.body;
-    // body.classList.add('modal-open')
-    // body.classList.add('modalOpenBody')
-    var elemento = document.getElementById("exampleModal");
-    console.log(elemento)
-    elemento.style.display = 'block';
-    elemento.classList.add("show");
-    elemento.classList.add("jw-modal-open");
-    //elemento.classList.add("modalOpenDiv");
-
-  }
+    
+  } 
 
   openModal(template: any) {
     this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'gray modal-lg' }));
