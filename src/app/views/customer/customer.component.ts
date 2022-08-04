@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
 import { CustomerList } from '../../models/customerList.model';
+import { PersonNew } from '../../models/personNew.model';
 import { CustomerService } from './customer.service'; 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
@@ -9,9 +10,10 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class CustomerComponent implements OnInit {
 
-  public customers: any;
-  private element: any;
+  public customers: any; 
   modalRef?: BsModalRef;
+  public personNew: PersonNew;
+
 
   title = 'appBootstrap';
   
@@ -26,7 +28,7 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     console.log("iniciando ok ");
     //this.customers = ["s","ss", "sss" ];
-
+    this.personNew = new PersonNew('','','');
     console.log(this.customerService.getTesteService());
 
     this.customerService.getCustomer().subscribe({
@@ -52,9 +54,10 @@ export class CustomerComponent implements OnInit {
   }
 
 
-  clickCreat(){
+  clickCreat(template){
     console.log("clickCreat");
-    this.modalopen()
+    this.personNew = new PersonNew('','','');
+    this.openModal(template);
   }
 
   clickEdit(){
@@ -78,13 +81,32 @@ export class CustomerComponent implements OnInit {
 
   }
 
-
   openModal(template: any) {
-    this.modalRef = this.modalService.show(template);
+    this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'gray modal-lg' }));
+  }
+
+  closeModal() {
+    this.modalRef.hide();
+    this.modalRef = new BsModalRef;
+  }
+
+  addCreatPerson(){
+    console.log("addCreatPerson");  
+    console.log(this.personNew);    
+    this.closeModal();
+
+    this.customerService.getCustomer().subscribe({
+      next: data => {
+          console.log("res getCustomer");
+          console.log(data);
+         
+      },
+      error: error => {
+          console.error('There was an error!', error);
+      }
+    }); 
+
+
   }
  
-
- 
- 
-
 }
