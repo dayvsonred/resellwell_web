@@ -13,7 +13,8 @@ export class CustomerComponent implements OnInit {
   public customers: any; 
   modalRef?: BsModalRef;
   public personNew: PersonNew;
-
+  public selectRow?: string[] ;
+  myClassBinding: string;
 
   title = 'appBootstrap';
   
@@ -27,10 +28,17 @@ export class CustomerComponent implements OnInit {
   
   ngOnInit() {
     console.log("iniciando ok ");
-    //this.customers = ["s","ss", "sss" ];
-    this.personNew = new PersonNew('','','');
+    this.startInitStage(); 
+    
+    this.iniPerson();
+    this.actionSelectRow(null);
     console.log(this.customerService.getTesteService());
+    this.myClassBinding = "trSelectBackColor";
+     
+  }
 
+  startInitStage(){
+    this.selectRow = null;
     this.customerService.getCustomer().subscribe({
       next: data => {
           console.log("res getCustomer");
@@ -41,22 +49,21 @@ export class CustomerComponent implements OnInit {
           console.error('There was an error!', error);
       }
     }); 
-
-  
-
-  }
+  } 
 
 
-  clickRow(customer){
+  clickRow(customer, lineClick){
     console.log("clickRow");
     console.log(customer);
-    
+    console.log(lineClick);
+    this.actionSelectRow(lineClick);
+  
   }
 
 
   clickCreat(template){
     console.log("clickCreat");
-    this.personNew = new PersonNew('','','');
+    this.iniPerson();
     this.openModal(template);
   }
 
@@ -92,21 +99,32 @@ export class CustomerComponent implements OnInit {
 
   addCreatPerson(){
     console.log("addCreatPerson");  
+    this.closeModal(); 
     console.log(this.personNew);    
-    this.closeModal();
 
-    this.customerService.getCustomer().subscribe({
+    this.customerService.addCreatPerson(this.personNew).subscribe({
       next: data => {
-          console.log("res getCustomer");
+          console.log("res personNew");
           console.log(data);
-         
+          this.startInitStage();
       },
       error: error => {
-          console.error('There was an error!', error);
+          console.error('error in call addCreatPerson', error);
       }
     }); 
 
 
+  }
+
+  iniPerson(){
+    this.personNew = new PersonNew('','','','');
+  }
+
+  actionSelectRow(index){
+    this.selectRow = [];
+    if(index!=null){
+      this.selectRow[index] = "trSelectBackColor";
+    }
   }
  
 }

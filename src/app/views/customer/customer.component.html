@@ -50,7 +50,7 @@
                   <span class="badge badge-warning">Pending</span>
                 </td>
               </tr> -->
-              <tr *ngFor="let customer of customers;" (click)="clickRow(customer)"> 
+              <tr *ngFor="let customer of customers; let i=index" (click)="clickRow(customer,i)" [class]="selectRow[i]" > 
                 <td> {{customer.name }} </td>
                 <td>2012/01/21</td>
                 <td>Staff</td>
@@ -116,48 +116,50 @@
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
-  <div class="modal-body"> 
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <!-- <div class="card-header">
-            <strong>Credit Card</strong>
-            <small>Form</small>
-          </div> -->
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="name">Nome</label>
-                  <input type="text" class="form-control" id="name" [(ngModel)]="personNew.name" placeholder="Enter name">
+  <form >
+  <div class="modal-body">  
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <!-- <div class="card-header">
+              <strong>Credit Card</strong>
+              <small>Form</small>
+            </div> -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="personNew.name">Nome</label>
+                    <input type="text" class="form-control" id="personNew.name" [(ngModel)]="personNew.name" [ngModelOptions]="{standalone: true}" placeholder="Enter name">
+                  </div>
                 </div>
-              </div>
-            </div><!--/.row-->
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="name">Telefone </label>
-                  <input type="text" class="form-control" id="phone" [(ngModel)]="personNew.phone" placeholder="Enter telefone">
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="personNew.phone">Telefone </label>
+                    <input type="text" class="form-control" id="personNew.phone" [(ngModel)]="personNew.phone" [ngModelOptions]="{standalone: true}" placeholder="Enter telefone">
+                  </div>
                 </div>
-              </div>
-            </div><!--/.row-->
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="name">Email </label>
-                  <input type="text" class="form-control" id="email" [(ngModel)]="personNew.email"  placeholder="Enter email">
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="personNew.email">Email </label>
+                    <input type="text" class="form-control" id="personNew.email" [(ngModel)]="personNew.email" [ngModelOptions]="{standalone: true}"  placeholder="Enter email">
+                  </div>
                 </div>
-              </div>
-            </div><!--/.row--> 
+              </div><!--/.row--> 
+            </div>
           </div>
-        </div>
-      </div><!--/.col--> 
-    </div><!--/.row-->
+        </div><!--/.col--> 
+      </div><!--/.row-->
+    
 
     <div class="col-12" > 
       <div class="row align-items-center mt-3">
         <div class="col-3 btSalveModal  mb-3 mb-xl-0">
-          <button (click)="addCreatPerson(template)" type="button" class="btn btn-block btn-success active"  aria-pressed="true">Adicionar</button>
+          <button (click)="addCreatPerson(template)" type="submit" class="btn btn-block btn-success active"  aria-pressed="true">Adicionar</button>
         </div>
         <div class="col-6   mb-3 mb-xl-0">  </div>
         <div class="col-3 btCloseModal  mb-3 mb-xl-0">
@@ -166,5 +168,6 @@
       </div>
     </div>
   </div>
+  </form>
 </ng-template>
 

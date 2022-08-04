@@ -3,8 +3,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map, throwError, catchError } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { Customer } from '../../models/customer.model';
 import { CustomerGet } from '../../models/customerGet.model';
 import { CustomerList } from '../../models/customerList.model';
+import { PersonNew } from '../../models/personNew.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,7 @@ export class CustomerService {
   private getClients: String = `${environment.PERSON_customer_list}`;
   private urlBase: String = `${environment.baseUrlGateWay}`;
   private urlCustomerList: String = `${environment.person.path}${environment.person.customer.list}`;
+  private urlCustomerAdd: String = `${environment.person.path}${environment.person.customer.add}`;
 
 
   constructor( private http: HttpClient, private router: Router ) { }
@@ -35,18 +38,15 @@ export class CustomerService {
      const headers = { 'Authorization': this.getToken() }; 
      console.log(`${this.urlBase}${this.urlCustomerList}`);
     return this.http.post<HttpResponse<CustomerList[]>>(`${this.urlBase}${this.urlCustomerList}`, body, { headers })
-    // .pipe(
-    //   map((res:any) => { 
-    //     console.log("res ************")
-    //     console.log(res) 
-    //     return res;
-    //   }),
-    //   catchError((e) => {
-    //     if (e.error.message) return throwError(() => e.error.message);
-    //     return throwError( () => 'ERROR');
-    //   })
-    // );
   }
+
+
+  public addCreatPerson(Person: PersonNew): Observable<HttpResponse<Customer>> {
+    let body = Person;
+    console.log("go");
+    const headers = { 'Authorization': this.getToken() };  
+   return this.http.post<HttpResponse<Customer>>(`${this.urlBase}${this.urlCustomerAdd}`, body, { headers });
+ }
 
 
 

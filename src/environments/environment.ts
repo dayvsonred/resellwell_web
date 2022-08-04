@@ -15,6 +15,7 @@ export const environment = {
     customer:
     { 
      list : "/customer/list",
+     add : "/customer/insert",
     }
   }
 
