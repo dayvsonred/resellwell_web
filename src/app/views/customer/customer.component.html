@@ -84,10 +84,10 @@
                 <button  (click)="clickCreat(template)" type="button" class="btn btn-block btn-success active"  aria-pressed="true">Novo</button>
               </div>
               <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                <button  (click)="clickEdit()" type="button" class="btn btn-block btn-primary active" aria-pressed="true">Editar</button>
+                <button  (click)="clickEdit(templateEdit)" type="button" class="btn btn-block btn-primary active" aria-pressed="true">Editar</button>
               </div>
               <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                <button  (click)="clickDell(templateDell, templateDellEmpty)" type="button" class="btn btn-block btn-danger active" aria-pressed="true">Deletar</button>
+                <button  (click)="clickDell(templateDell, templateEmpty)" type="button" class="btn btn-block btn-danger active" aria-pressed="true">Deletar</button>
               </div>
             </div>
           </div>
@@ -220,7 +220,7 @@
 </ng-template>
 
 
-<ng-template #templateDellEmpty>
+<ng-template #templateEmpty>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Selecione um Usuário</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
@@ -243,6 +243,68 @@
   </form>
 </ng-template>
 
+
+<ng-template #templateEdit>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Editando Usuário</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <form >
+  <div class="modal-body">  
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <!-- <div class="card-header">
+              <strong>Credit Card</strong>
+              <small>Form</small>
+            </div> -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="personNew.name">Nome</label>
+                    <input type="text" class="form-control" id="personNew.name" [(ngModel)]="personNew.name" [ngModelOptions]="{standalone: true}" placeholder="Enter name">
+                  </div>
+                </div>
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="personNew.phone">Telefone </label>
+                    <input type="text" class="form-control" id="personNew.phone" [(ngModel)]="personNew.phone" [ngModelOptions]="{standalone: true}" placeholder="Enter telefone">
+                  </div>
+                </div>
+              </div><!--/.row-->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="personNew.email">Email </label>
+                    <input type="text" class="form-control" id="personNew.email" [(ngModel)]="personNew.email" [ngModelOptions]="{standalone: true}"  placeholder="Enter email">
+                  </div>
+                </div>
+              </div><!--/.row--> 
+            </div>
+          </div>
+        </div><!--/.col--> 
+      </div><!--/.row-->
+    
+
+    <div class="col-12" > 
+      <div class="row align-items-center mt-3">
+        <div class="col-3 btSalveModal  mb-3 mb-xl-0">
+          <button (click)="actionEditCustomer(templateEdit)" type="submit" class="btn btn-block btn-success active"  aria-pressed="true">Atualizar</button>
+        </div>
+        <div class="col-6   mb-3 mb-xl-0">  </div>
+        <div class="col-3 btCloseModal  mb-3 mb-xl-0">
+          <button  (click)="modalRef?.hide()" type="button" class="btn btn-block btn-danger active" aria-pressed="true">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</ng-template>
 
 
 

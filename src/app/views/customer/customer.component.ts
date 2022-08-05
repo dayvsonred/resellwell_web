@@ -10,35 +10,29 @@ import {ModalDirective} from 'ngx-bootstrap/modal';
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
-  @ViewChild('staticModal') public staticModal: ModalDirective;
-
   public customers: any; 
   modalRef?: BsModalRef;
   public personNew: PersonNew;
   public selectRow?: string[];
-  public customerSelect: any; 
+  public customerSelect?: any; 
   public bsmodal: any;
 
   title = 'appBootstrap';
   
   closeResult: string;
 
-  constructor( private customerService: CustomerService, private modalService: BsModalService  ) { 
- 
-
-  }
-
+  constructor( private customerService: CustomerService, private modalService: BsModalService  ) { }
   
   ngOnInit() {
     console.log("iniciando ok "); 
     this.startInitStage(); 
     //console.log(this.customerService.getTesteService());
-     
   }
 
   startInitStage(){ 
     this.iniPerson();
     this.actionSelectRow(null);
+    this.customerSelect = {};
     if(this.modalRef!=undefined){
       this.closeModal();
     }
@@ -52,8 +46,7 @@ export class CustomerComponent implements OnInit {
           console.error('There was an error!', error);
       }
     }); 
-  } 
-
+  }
 
   clickRow(customer, lineClick){
     console.log("clickRow");
@@ -69,18 +62,24 @@ export class CustomerComponent implements OnInit {
     this.openModal(template, false);
   }
 
-  clickEdit(){
+  clickEdit(templateEdit){
     console.log("clickEdit"); 
+    console.log(this.customerSelect);
+    if(this.itSelected()){
+      this.personNew = { ...this.customerSelect };
+      this.openModal(templateEdit, true); 
+    }else{
+      this.openModal(templateEdit, false);
+    } 
   }
 
-  clickDell(templateDell, templateDellEmpty){
+  clickDell(templateDell, templateEmpty){
     console.log("clickDell");
-    
     console.log(this.customerSelect);
-    if(this.customerSelect!= undefined ){
+    if(this.itSelected()){
       this.openModal(templateDell, true); 
     }else{
-      this.openModal(templateDellEmpty, false);
+      this.openModal(templateEmpty, false);
     } 
   } 
 
@@ -128,7 +127,24 @@ export class CustomerComponent implements OnInit {
   }
 
   iniPerson(){
-    this.personNew = new PersonNew('','','','');
+    this.personNew = new PersonNew('','','','','');
+  }
+
+  actionEditCustomer(){
+    console.log("actionEditCustomer");  
+    this.closeModal(); 
+    console.log(this.personNew);   
+    
+    this.customerService.putPerson(this.personNew).subscribe({
+      next: data => {
+          console.log("res putPerson");
+          console.log(data);
+          this.startInitStage();
+      },
+      error: error => {
+          console.error('error in call actionEditCustomer', error);
+      }
+    }); 
   }
 
   actionSelectRow(index){
@@ -136,5 +152,19 @@ export class CustomerComponent implements OnInit {
     if(index!=null){
       this.selectRow[index] = "trSelectBackColor";
     }
+  }
+
+  itSelected(){
+    if( this.customerSelect != null && this.customerSelect != undefined && ( this.itObjectEmpty(this.customerSelect) == true ) ){
+      return false;
+    }
+    return true;
+  }
+
+  itObjectEmpty(obj){
+    if( Object.keys(obj).length === 0 && Object.getPrototypeOf(obj) === Object.prototype ) { 
+      return true;
+    }
+    return false;
   }
 }

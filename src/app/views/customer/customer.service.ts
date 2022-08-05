@@ -18,6 +18,7 @@ export class CustomerService {
   private urlCustomerList: String = `${environment.person.path}${environment.person.customer.list}`;
   private urlCustomerAdd: String = `${environment.person.path}${environment.person.customer.add}`;
   private urlCustomerDell: String = `${environment.person.path}${environment.person.customer.dell}`;
+  private urlCustomerEdit: String = `${environment.person.path}${environment.person.customer.put}`;
 
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -49,11 +50,21 @@ export class CustomerService {
     return this.http.post<HttpResponse<Customer>>(`${this.urlBase}${this.urlCustomerAdd}`, body, { headers });
   }
 
-  public dellCustomer(customerId: number): Observable<HttpResponse<Customer>> {
+  public dellCustomer(customerId: number): Observable<HttpResponse<any>> {
     console.log("go  dellCustomer");
     console.log("customerId " + customerId);
     const headers = { 'Authorization': this.getToken(), "Content-Type": "application/json;charset=UTF-8", };
-    return this.http.delete<HttpResponse<Customer>>(`${this.urlBase}${this.urlCustomerDell}${customerId}`, { headers });
+    return this.http.delete<HttpResponse<any>>(`${this.urlBase}${this.urlCustomerDell}${customerId}`, { headers });
+  }
+
+  public putPerson(customer: PersonNew): Observable<HttpResponse<Customer>> {
+    console.log("putPerson");
+    console.log(customer);
+    let personId = customer.person.id;
+    customer.person = personId;
+    let body = customer;
+    const headers = { 'Authorization': this.getToken() };
+    return this.http.put<HttpResponse<Customer>>(`${this.urlBase}${this.urlCustomerEdit}`, body, { headers });
   }
 
 

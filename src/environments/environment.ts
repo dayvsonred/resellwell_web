@@ -13,10 +13,11 @@ export const environment = {
   person : {
     path: "/resell-person",
     customer:
-    { 
+    {
      list : "/customer/list",
      add : "/customer/insert",
      dell : "/customer/deleting/",
+     put : "/customer",
     }
   }
 
