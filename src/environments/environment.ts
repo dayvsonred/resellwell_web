@@ -16,6 +16,7 @@ export const environment = {
     { 
      list : "/customer/list",
      add : "/customer/insert",
+     dell : "/customer/deleting/",
     }
   }
 

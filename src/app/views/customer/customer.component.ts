@@ -30,16 +30,18 @@ export class CustomerComponent implements OnInit {
 
   
   ngOnInit() {
-    console.log("iniciando ok ");
+    console.log("iniciando ok "); 
     this.startInitStage(); 
-    this.iniPerson();
-    this.actionSelectRow(null);
     //console.log(this.customerService.getTesteService());
      
   }
 
-  startInitStage(){
-    this.selectRow = null;
+  startInitStage(){ 
+    this.iniPerson();
+    this.actionSelectRow(null);
+    if(this.modalRef!=undefined){
+      this.closeModal();
+    }
     this.customerService.getCustomer().subscribe({
       next: data => {
           console.log("res getCustomer");
@@ -79,10 +81,23 @@ export class CustomerComponent implements OnInit {
       this.openModal(templateDell, true); 
     }else{
       this.openModal(templateDellEmpty, false);
-    }
-    
-    
+    } 
   } 
+
+  actionDellCustomer(customerId: number){
+    console.log("actionDellCustomer");
+    console.log(customerId);
+    this.customerService.dellCustomer(customerId).subscribe({
+      next: data => {
+          console.log("res actionDellCustomer");
+          console.log(data);
+          this.startInitStage();
+      },
+      error: error => {
+          console.error('error in call actionDellCustomer', error);
+      }
+    }); 
+  }
 
   openModal(template: any, closeOnClick: boolean) { 
     this.modalService.config = new ModalOptions;
@@ -109,9 +124,7 @@ export class CustomerComponent implements OnInit {
       error: error => {
           console.error('error in call addCreatPerson', error);
       }
-    }); 
-
-
+    });  
   }
 
   iniPerson(){
