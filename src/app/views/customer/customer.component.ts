@@ -1,20 +1,23 @@
-import { Component, ElementRef, OnInit, TemplateRef } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { CustomerList } from '../../models/customerList.model';
 import { PersonNew } from '../../models/personNew.model';
 import { CustomerService } from './customer.service'; 
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalService, BsModalRef, ModalOptions  } from 'ngx-bootstrap/modal';
+import {ModalDirective} from 'ngx-bootstrap/modal';
 
 @Component({
   templateUrl: 'customer.component.html',
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
+  @ViewChild('staticModal') public staticModal: ModalDirective;
 
   public customers: any; 
   modalRef?: BsModalRef;
   public personNew: PersonNew;
   public selectRow?: string[];
   public customerSelect: any; 
+  public bsmodal: any;
 
   title = 'appBootstrap';
   
@@ -61,22 +64,30 @@ export class CustomerComponent implements OnInit {
   clickCreat(template){
     console.log("clickCreat");
     this.iniPerson();
-    this.openModal(template);
+    this.openModal(template, false);
   }
 
   clickEdit(){
     console.log("clickEdit"); 
   }
 
-  clickDell(){
+  clickDell(templateDell, templateDellEmpty){
     console.log("clickDell");
+    
     console.log(this.customerSelect);
-
+    if(this.customerSelect!= undefined ){
+      this.openModal(templateDell, true); 
+    }else{
+      this.openModal(templateDellEmpty, false);
+    }
+    
     
   } 
 
-  openModal(template: any) {
-    this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'gray modal-lg' }));
+  openModal(template: any, closeOnClick: boolean) { 
+    this.modalService.config = new ModalOptions;
+    if(closeOnClick) this.modalService.config.backdrop = 'static'; 
+    this.modalRef = this.modalService.show(template ,Object.assign({}, { class: 'gray modal-lg', ...this.modalService.config }));
   }
 
   closeModal() {
@@ -113,5 +124,4 @@ export class CustomerComponent implements OnInit {
       this.selectRow[index] = "trSelectBackColor";
     }
   }
- 
 }

@@ -87,7 +87,7 @@
                 <button  (click)="clickEdit()" type="button" class="btn btn-block btn-primary active" aria-pressed="true">Editar</button>
               </div>
               <div class="col-6 col-sm-4 col-md-2 col-xl mb-3 mb-xl-0">
-                <button  (click)="clickDell()" type="button" class="btn btn-block btn-danger active" aria-pressed="true">Deletar</button>
+                <button  (click)="clickDell(templateDell, templateDellEmpty)" type="button" class="btn btn-block btn-danger active" aria-pressed="true">Deletar</button>
               </div>
             </div>
           </div>
@@ -101,10 +101,28 @@
   </div> 
 
 
-  <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button> -->
- 
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <button type="button" class="btn btn-primary" (click)="openModal(template)">Create template modal</button> -->
   <!--/.row-->
 </div>
  
@@ -170,4 +188,61 @@
   </div>
   </form>
 </ng-template>
+
+
+
+<ng-template #templateDell>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Removendo Usuário</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <form >
+  <div class="modal-body">   
+    <div class="card-body">
+      Usuario Nome : {{customerSelect.name}}
+    </div>
+
+    <div class="col-12" > 
+      <div class="row align-items-center mt-3">
+        <div class="col-3 btSalveModal  mb-3 mb-xl-0">
+          <button (click)="addCreatPerson(template)" type="submit" class="btn btn-block btn-danger active"  aria-pressed="true">Remover</button>
+        </div>
+        <div class="col-6   mb-3 mb-xl-0">  </div>
+        <div class="col-3 btCloseModal  mb-3 mb-xl-0">
+          <button  (click)="modalRef?.hide()" type="button" class="btn btn-block btn-secondary active" aria-pressed="true">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</ng-template>
+
+
+<ng-template #templateDellEmpty>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Selecione um Usuário</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <form >
+  <div class="modal-body">    
+    <div class="col-12" > 
+      <div class="row align-items-center mt-3">
+        <div class="col-3 btSalveModal  mb-3 mb-xl-0"> 
+        </div>
+        <div class="col-6   mb-3 mb-xl-0">  </div>
+        <div class="col-3 btCloseModal  mb-3 mb-xl-0">
+          <button  (click)="modalRef?.hide()" type="button" class="btn btn-block btn-secondary active" aria-pressed="true">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</ng-template>
+
+
+
 
